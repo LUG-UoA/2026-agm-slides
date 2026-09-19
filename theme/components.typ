@@ -32,7 +32,7 @@
   grid(
     columns: (1fr, 1fr),
     column-gutter: gutter,
-    left, right
+    left, right,
   )
 }
 
@@ -41,7 +41,7 @@
   grid(
     columns: (1fr, 1fr, 1fr),
     column-gutter: gutter,
-    a, b, c
+    a, b, c,
   )
 }
 
@@ -240,7 +240,7 @@
         baseline: 0.4em,
       )
     ],
-    body
+    body,
   )
 }
 

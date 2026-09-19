@@ -208,13 +208,22 @@
         )
 
         // Refined list styling with custom bullets
+        // Typst sits a shape marker on the text baseline, which leaves a dot
+        // straddling the baseline. Lift it by (marker radius - half the font's
+        // x-height) so it is centred on the lowercase body of the line instead.
+        // 0.24em is half of Lato's x-height at the body size.
+        let centered-marker(m, height: 6pt) = box(
+          baseline: height / 2 - 0.24em,
+          align(center + horizon, m),
+        )
+
         set list(
           marker: (
-            bullet-circle(color: c.accent-secondary),
-            bullet-square(color: c.accent-secondary),
-            bullet-dash(color: c.accent-secondary),
+            centered-marker(bullet-circle(color: c.accent-secondary), height: 6pt),
+            centered-marker(bullet-square(color: c.accent-secondary), height: 5pt),
+            centered-marker(bullet-dash(color: c.accent-secondary), height: 2pt),
           ),
-          indent: spacing-md,
+          indent: 0pt,
           body-indent: spacing-sm,
         )
 
@@ -225,7 +234,7 @@
             weight: "medium",
             size: size-small,
           )[#n.],
-          indent: spacing-md,
+          indent: 0pt,
           body-indent: spacing-sm,
         )
 

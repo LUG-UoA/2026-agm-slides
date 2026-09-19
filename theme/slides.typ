@@ -15,7 +15,7 @@
   block(
     width: 100%,
     fill: colors.header-bg,
-    inset: (x: spacing-lg, top: spacing-md, bottom: 14pt),
+    inset: (x: spacing-2xl, top: spacing-md, bottom: 14pt), // Text starts at the body margin (spacing-2xl)
     outset: (x: spacing-2xl, top: spacing-2xl + spacing-md), // Match the increased top margin
   )[
     #text(
@@ -134,27 +134,33 @@
   let header-fn = if header-style == "moloch" { moloch-header } else { minimal-header }
 
   // Footer with optional progress bar
+  // Inset by the page margin and lifted slightly off the bottom edge so the
+  // bar and page number line up with the body content instead of hugging the edges.
   let footer(self) = context {
     let current = utils.slide-counter.get().first()
     let total = utils.last-slide-counter.final().first()
 
-    v(spacing-sm)
-
-    if progressbar == "foot" {
-      components.left-and-right(
-        make-progress-bar(c, height: 2pt, position: "foot"),
-        text(fill: c.text-secondary, size: size-small)[
-          #current #text(fill: c.text-muted)[/] #total
-        ],
-      )
-    } else {
-      // Just show page numbers without progress bar
-      align(right)[
-        #text(fill: c.text-secondary, size: size-small)[
-          #current #text(fill: c.text-muted)[/] #total
+    box(
+      inset: (left: spacing-2xl, right: spacing-2xl, top: spacing-sm, bottom: 8pt),
+    )[
+      #if progressbar == "foot" {
+        components.left-and-right(
+          make-progress-bar(c, height: 2pt, position: "foot"),
+          align(bottom)[
+            #text(fill: c.text-secondary, size: size-small)[
+              #current #text(fill: c.text-muted)[/] #total
+            ]
+          ],
+        )
+      } else {
+        // Just show page numbers without progress bar
+        align(right)[
+          #text(fill: c.text-secondary, size: size-small)[
+            #current #text(fill: c.text-muted)[/] #total
+          ]
         ]
-      ]
-    }
+      }
+    ]
   }
 
   // Header at top with progress bar if head position
