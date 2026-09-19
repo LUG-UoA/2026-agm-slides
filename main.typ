@@ -40,8 +40,9 @@
 #let site-link = "https://lug.ac"
 #let github-link = "https://github.com/lug-uoa"
 #let discord-link = "https://discord.gg/lug-uoa" // TODO: current invite
-#let minutes-link = "https://tinyurl.com/lug-uoa-2025-eagm-minutes" // TODO: 2025 EAGM minutes
-#let annual-report-link = "https://tinyurl.com/lug-uoa-2026-agm-annual-report" // TODO: 2026 Annual Report
+#let minutes-link = "http://link.birdmakingstuff.nz/2025-eagm-minutes"
+#let annual-report-link = "https://birdmakingstuff.nz/placeholder" // TODO: 2026 Annual Report
+#let treasurer-report-link = "https://birdmakingstuff.nz/placeholder" // TODO: 2026 Annual Report
 
 #let club-abbr = [LUG\@UoA]
 
@@ -336,6 +337,7 @@ _Continued on next slides..._
 == Agenda
 #agenda(covered: 5)
 
+== Annual Report
 #two-col[
   What the report covers:
   - Objects of the Club
@@ -359,7 +361,16 @@ _Continued on next slides..._
 = Treasurer's Report
 
 == Treasurer's Report
-- Statement of Income and Expenditure, Assets and Liabilities for the year
+
+#two-col[
+  What the report covers:
+  - Statement of Income and Expenditure, Assets and Liabilities for the year
+
+  Available at: #weblink(treasurer-report-link, [#treasurer-report-link])
+][
+  #qr-code(treasurer-report-link, size: 150pt, caption: [Scan for the Treasurer's Report])
+]
+
 
 #vote([To accept the Treasurer's Report.])
 
