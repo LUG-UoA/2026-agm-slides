@@ -40,7 +40,7 @@
 #let site-link = "https://lug.ac"
 #let github-link = "https://github.com/lug-uoa"
 #let discord-link = "https://discord.gg/lug-uoa" // TODO: current invite
-#let minutes-link = "http://link.birdmakingstuff.nz/2025-eagm-minutes"
+#let minutes-link = "https://link.birdmakingstuff.nz/2025-eagm-minutes"
 #let annual-report-link = "https://birdmakingstuff.nz/placeholder" // TODO: 2026 Annual Report
 #let treasurer-report-link = "https://birdmakingstuff.nz/placeholder" // TODO: 2026 Annual Report
 
@@ -93,6 +93,137 @@
     #if note != none [#note]
   ]
 ]
+
+// ──────────────────────────────────────────────────────────────────────────
+//  TREASURER'S STATEMENT
+//  The figures live here, once, in the order the Treasurer's statement reads.
+//  The statement is presented over two slides so the numbers stay legible from
+//  the back of the room; changing a figure here changes it on both.
+//
+//    kind: "group"  a section band - `label`, optionally `amount`
+//    kind: "line"   `label` and `amount`; `total: true` rules a line off above
+//                   it and bolds the row, `strong: true` only bolds it
+//    kind: "gap"    a little air between sections
+// ──────────────────────────────────────────────────────────────────────────
+
+#let treasurer-income-rows = (
+  (kind: "group", label: "Account balance", amount: "NZD"),
+  (kind: "line", label: "Opening account balance", amount: "$0.52"),
+  (kind: "group", label: "Income"),
+  (kind: "line", label: "Raspberry Pi lease", amount: "$60.00"),
+  (kind: "line", label: "University of Auckland grant", amount: "$1,000.06"),
+  (kind: "line", label: "Total income", amount: "$1,060.06", total: true),
+  (kind: "gap"),
+  (kind: "group", label: "Expenses"),
+  (kind: "line", label: "No expenses paid", amount: "$0.00"),
+  (kind: "line", label: "Total expenses", amount: "$0.00", total: true),
+  (kind: "gap"),
+  (kind: "group", label: "Profit", amount: "$1,060.06"),
+  (kind: "gap", size: 2.5pt),
+  (kind: "line", label: "Closing account balance", amount: "$1,060.58", total: true),
+)
+
+#let treasurer-asset-rows = (
+  (kind: "group", label: "Assets", amount: "NZD"),
+  (kind: "line", label: "Cash / bank balance", amount: "$1,060.58"),
+  (kind: "line", label: "2x Raspberry Pi 5 (fixed assets)", amount: "$525.48"),
+  (kind: "line", label: "Total assets", amount: "$1,586.06", total: true),
+  (kind: "gap"),
+  (kind: "group", label: "Liabilities"),
+  (kind: "line", label: "Big Tuxus stickers", amount: "$43.00"),
+  (kind: "line", label: "Standard stickers", amount: "$67.00"),
+  (kind: "line", label: "Pizza Hut order: STK Tournament 2", amount: "$43.46"),
+  (kind: "line", label: "Pizza Hut order: STK Tournament 3", amount: "$39.99"),
+  (kind: "line", label: "GDGCxLUG Open Source Workshop", amount: "$40.00"),
+  (kind: "line", label: "Total liabilities", amount: "$233.45", total: true),
+)
+
+// Caps label used for both the section bands in the tables and the note's
+// title, so the same words always look the same across the Treasurer slides.
+// One text size runs through the whole statement: hierarchy comes from weight,
+// colour, the tinted band and the rules, which keeps every band the same height
+// and every baseline level. `accent-primary` on its own is a fill colour, too
+// light to read as text; darkened it clears 4.5:1 against the band in every
+// theme.
+#let group-label(content) = {
+  let c = get-theme-colors(theme: colortheme)
+  text(
+    size: size-body,
+    weight: "semibold",
+    tracking: tracking-wider,
+    fill: c.accent-primary.darken(45%),
+  )[#upper(content)]
+}
+
+// Renders either set of rows as a two-column statement: labels left, amounts
+// right, sections on a tinted band. Amounts sit in the primary text colour and
+// labels stay secondary, so the figures are what the eye lands on.
+#let treasurer-table(rows) = {
+  let c = get-theme-colors(theme: colortheme)
+  let ins = (x: spacing-sm, y: 5pt)
+
+  let cells = ()
+  for row in rows {
+    if row.kind == "gap" {
+      // A gap row is how much air a section gets. The one before the closing
+      // balance is deliberately smaller: the rule under it is drawn on the
+      // row's top edge, and it needs the same clearance from the filled band
+      // above as a rule following a row of text gets from that row's inset.
+      cells.push(table.cell(
+        colspan: 2,
+        inset: (y: row.at("size", default: 4pt)),
+      )[])
+    } else if row.kind == "group" {
+      let amount = row.at("amount", default: none)
+      let band-cell(side, content) = table.cell(
+        fill: c.bg-surface,
+        inset: ins,
+        align: side,
+      )[#content]
+
+      if amount == none {
+        cells.push(table.cell(
+          colspan: 2,
+          fill: c.bg-surface,
+          inset: ins,
+          align: left,
+        )[#group-label(row.label)])
+      } else {
+        cells.push(band-cell(left, group-label(row.label)))
+
+        // "NZD" is the column's unit, not a figure, so it stays lighter than the
+        // profit figure, which is read as a figure and carries the same weight
+        // and colour as the amounts above it.
+        let is-unit = amount == "NZD"
+        cells.push(band-cell(right, text(
+          weight: if is-unit { "medium" } else { "semibold" },
+          tracking: if is-unit { tracking-wider } else { tracking-normal },
+          fill: if is-unit { c.text-secondary } else { c.text-primary },
+        )[#upper(amount)]))
+      }
+    } else {
+      let is-total = row.at("total", default: false)
+      let emphasised = is-total or row.at("strong", default: false)
+      let rule = if is-total { (top: 0.75pt + c.border-medium) } else { none }
+
+      cells.push(table.cell(inset: ins, stroke: rule)[
+        #if emphasised { strong[#row.label] } else { row.label }
+      ])
+      cells.push(table.cell(inset: ins, align: right, stroke: rule)[
+        #if emphasised { strong[#row.amount] } else { text(fill: c.text-primary)[#row.amount] }
+      ])
+    }
+  }
+
+  table(
+    columns: (1fr, auto),
+    column-gutter: 0pt,
+    row-gutter: 0pt,
+    stroke: none,
+    inset: ins,
+    ..cells,
+  )
+}
 
 // ──────────────────────────────────────────────────────────────────────────
 //  AGENDA
@@ -360,19 +491,22 @@ _Continued on next slides..._
 
 = Treasurer's Report
 
-== Treasurer's Report
+== Statement of Income and Expenditure
+#align(horizon)[#treasurer-table(treasurer-income-rows)]
 
-#two-col[
-  What the report covers:
-  - Statement of Income and Expenditure, Assets and Liabilities for the year
+== Statement of Assets and Liabilities
+#align(horizon)[#treasurer-table(treasurer-asset-rows)]
 
-  Available at: #weblink(treasurer-report-link, [#treasurer-report-link])
-][
-  #qr-code(treasurer-report-link, size: 150pt, caption: [Scan for the Treasurer's Report])
+== Notice and Vote to Accept Treasurer's Report
+#align(horizon)[
+  #highlight-box(title: [#group-label("Note")])[
+    The Treasurer currently does not have access to the Club's bank account following the recent change of banking provider. The cash balance above is based on the latest available account information from forwarded statements. The liabilities listed above are unpaid expenses/commitments and have therefore not been included in total expenses.
+  ]
+
+  #v(spacing-md)
+
+  #vote([To accept the Treasurer's Report.])
 ]
-
-
-#vote([To accept the Treasurer's Report.])
 
 // ──────────────────────────────────────────────────────────────────────────
 == Agenda
