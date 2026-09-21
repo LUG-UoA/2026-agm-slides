@@ -41,8 +41,7 @@
 #let github-link = "https://github.com/lug-uoa"
 #let discord-link = "https://discord.gg/lug-uoa" // TODO: current invite
 #let minutes-link = "https://link.birdmakingstuff.nz/2025-eagm-minutes"
-#let annual-report-link = "https://birdmakingstuff.nz/placeholder" // TODO: 2026 Annual Report
-#let treasurer-report-link = "https://birdmakingstuff.nz/placeholder" // TODO: 2026 Annual Report
+#let annual-report-link = "http://link.birdmakingstuff.nz/lug-2026-annual-report" // TODO: 2026 Annual Report
 
 #let club-abbr = [LUG\@UoA]
 
@@ -457,9 +456,8 @@ _Continued on next slides..._
   What the report covers:
   - Objects of the Club
   - Meetings and Events Held
-  - Board and Officers for the Year
   - Financial Summary
-  - Strategic Planning and Future Outlook
+  - Future Outlook
   - Acknowledgements
 
   Available at: #weblink(annual-report-link, [#annual-report-link])
@@ -477,9 +475,8 @@ _Continued on next slides..._
   What the report covers:
   - Objects of the Club
   - Meetings and Events Held
-  - Board and Officers for the Year
   - Financial Summary
-  - Strategic Planning and Future Outlook
+  - Future Outlook
   - Acknowledgements
 
   Available at: #weblink(annual-report-link, [#annual-report-link])
