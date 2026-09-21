@@ -624,8 +624,7 @@ With the amendment and the sub-amendment carried, clause 4 in section 8 reads:
 3. Treasurer (Vice President)
 4. Events Executive
 5. Collaborations Executive
-6. Projects Executive
-7. General Executive Member (multiple)
+6. General Executive Member (multiple)
 ```
 // ──────────────────────────────────────────────────────────────────────────
 == Agenda
