@@ -417,7 +417,7 @@ All four are now in the constitution at #weblink(constitution-link, [#constituti
 
 _Continued on next slides..._
 
-== Executive confirmed at the previous meeting
+== Executives confirmed at the previous meeting
 - *President:* Thomas Dickson
 - *Treasurer (Vice President):* Parmjot Singh
 - *Secretary:* Ben Wang
