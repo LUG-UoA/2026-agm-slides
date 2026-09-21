@@ -134,8 +134,12 @@
   (kind: "line", label: "Standard stickers", amount: "$67.00"),
   (kind: "line", label: "Pizza Hut order: STK Tournament 2", amount: "$43.46"),
   (kind: "line", label: "Pizza Hut order: STK Tournament 3", amount: "$39.99"),
+  (kind: "line", label: "Pizza Hut order: Self-Hosting", amount: "$50.98"),
+  (kind: "line", label: "Pizza Hut order: Game Console talk", amount: "$39.99"),
+  (kind: "line", label: "Pizza Hut order: NixOS talk", amount: "$50.98"),
   (kind: "line", label: "GDGCxLUG Open Source Workshop", amount: "$40.00"),
-  (kind: "line", label: "Total liabilities", amount: "$233.45", total: true),
+  (kind: "line", label: "St Pierre's Sushi AGM", amount: "$38.50"),
+  (kind: "line", label: "Total liabilities", amount: "$414.89", total: true),
 )
 
 // Caps label used for both the section bands in the tables and the note's
