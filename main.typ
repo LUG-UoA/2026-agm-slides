@@ -371,7 +371,7 @@ $ f("Exec") = f("Non-exec") $
 
 #soft-divider()
 
-#muted[All of this is in the constitution: #weblink(constitution-link, [lug.ac/constitution])]
+#muted[All of this is in the constitution: #weblink(constitution-link, [#constitution-link])]
 
 // ──────────────────────────────────────────────────────────────────────────
 
