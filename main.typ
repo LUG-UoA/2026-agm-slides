@@ -574,8 +574,8 @@ Modify clause 4 in section 8 to the following:
 1. President
 2. Secretary
 3. Treasurer (Vice President)
-4. Events Executive
-- 5. General Executive Member (multiple)
+- 4. General Executive Member (multiple)
++ 4. Events Executive
 + 5. Collaborations Executive
 + 6. General Executive Member (multiple)
 ```
