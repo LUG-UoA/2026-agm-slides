@@ -362,7 +362,7 @@ Every financial member present is entitled to one (1) vote per issue.
 $ f("Exec") = f("Non-exec") $
 
 - Raise one physical or Zoom hand to vote
-- The President holds a deliberate vote, and a casting vote in the event of a tie
+- The President holds a deliberative vote, and a casting vote in the event of a tie
 
 == Quorum and thresholds
 - *Quorum:* a minimum of five (5) Management Committee members. If no quorum is present thirty (30) minutes after the time appointed, the meeting stands adjourned for one (1) week.
